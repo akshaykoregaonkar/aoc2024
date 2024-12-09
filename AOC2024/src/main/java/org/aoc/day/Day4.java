@@ -11,7 +11,7 @@ public class Day4 {
     private int rows, cols;
     
     public Day4(){
-        processFile("src/main/resources/day4.txt");
+        processFile("aoc2024/src/main/resources/day4.txt");
     }
 
     private char[][] processFile(String filepath) {

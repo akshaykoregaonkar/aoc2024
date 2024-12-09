@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Day2 {
     public Day2(){
-        processFile("src/main/resources/day2.txt");
+        processFile("aoc2024/src/main/resources/day2.txt");
     }
 
     List<List<Integer>> reports = new ArrayList<>();

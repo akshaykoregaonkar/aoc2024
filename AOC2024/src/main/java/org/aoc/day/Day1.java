@@ -10,7 +10,7 @@ import java.util.PriorityQueue;
 public class Day1{
 
     public Day1(){
-        processFile("src/main/resources/day1.txt");
+        processFile("aoc2024/src/main/resources/day1.txt");
     }
 
     PriorityQueue<Integer> queue1 = new PriorityQueue<>();

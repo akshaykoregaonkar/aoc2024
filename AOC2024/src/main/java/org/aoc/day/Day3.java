@@ -14,7 +14,7 @@ public class Day3 {
 
     public Day3(){
         regex  = "mul\\((\\d+),\\s*(\\d+)\\)";
-        processFile("src/main/resources/day3.txt");
+        processFile("aoc2024/src/main/resources/day3.txt");
         System.out.println(matches);
     }
 
