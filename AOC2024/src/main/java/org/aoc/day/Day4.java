@@ -14,7 +14,7 @@ public class Day4 {
         processFile("aoc2024/src/main/resources/day4.txt");
     }
 
-    private char[][] processFile(String filepath) {
+    private void processFile(String filepath) {
         List<char[]> gridList = new ArrayList<>();
         try(BufferedReader reader = new BufferedReader(new FileReader(filepath))){
             String line;
@@ -32,7 +32,6 @@ public class Day4 {
         for (int i = 0; i < rows; i++) {
             grid[i] = gridList.get(i);
         }
-        return grid;
     }
 
     public int part1(){
@@ -45,7 +44,7 @@ public class Day4 {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 for(int[] dir: directions){
-                    if(dfs(grid, i, j, 0, word, new int[]{dir[0], dir[1]})){
+                    if(dfs(i, j, 0, word, new int[]{dir[0], dir[1]})){
                         count++; 
                     }
                 }
@@ -67,12 +66,12 @@ public class Day4 {
         */
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if(dfs(grid, i, j, 0, word, new int[]{1, 1})){
+                if(dfs(i, j, 0, word, new int[]{1, 1})){
                     if(checkCross(i + 2, j, word, i, j + 2)){
                         count++;
                     }
                 }
-                if(dfs(grid, i, j, 0, word, new int[]{-1, -1})){
+                if(dfs(i, j, 0, word, new int[]{-1, -1})){
                     if(checkCross(i, j - 2, word, i - 2, j)){
                         count++;
                     }
@@ -84,11 +83,11 @@ public class Day4 {
     }
 
     private boolean checkCross(int i, int j, String word, int i_rev, int j_rev) {
-        return dfs(grid, i, j, 0, word, new int[]{-1, 1}) ||
-                dfs(grid, i_rev, j_rev, 0, word, new int[]{1, -1});
+        return dfs(i, j, 0, word, new int[]{-1, 1}) ||
+                dfs(i_rev, j_rev, 0, word, new int[]{1, -1});
     }
 
-    private boolean dfs(char[][] grid, int x, int y, int index, String word, int [] next_direction) {
+    private boolean dfs(int x, int y, int index, String word, int [] next_direction) {
         int x_dir = next_direction[0];
         int y_dir = next_direction[1];
 
@@ -100,7 +99,7 @@ public class Day4 {
             return false;
         }
 
-        return dfs(grid, x + x_dir, y + y_dir, index + 1, word, next_direction);
+        return dfs(x + x_dir, y + y_dir, index + 1, word, next_direction);
     }
 
 }
