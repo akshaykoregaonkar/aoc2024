@@ -1,13 +1,11 @@
 package org.aoc;
 
-import org.aoc.day.Day4;
-import org.aoc.day.Day5;
-import org.aoc.day.Day6;
+import org.aoc.day.Day7;
 
 public class Main {
     public static void main(String[] args) {
-        Day6 day6 = new Day6();
-        System.out.println(day6.part1());
-        System.out.println(day6.part2());
+        Day7 day7 = new Day7();
+        System.out.println(day7.part1());
+        System.out.println(day7.part2());
     }
 }
