@@ -10,18 +10,18 @@ public class Day16 {
     private int rows, cols;
     static final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}; // reindeer points east
     char[][] grid;
+    List<Node> optimalPaths;
 
     public Day16(){
         processFile("aoc2024/src/main/resources/day16.txt");
+        optimalPaths = findAllOptimalPaths();
     }
 
     public int part1(){
-        List<Node> optimalPaths = findAllOptimalPaths();
         return optimalPaths.get(0).cost;
     }
 
     public int part2(){
-        List<Node> optimalPaths = findAllOptimalPaths();
         return countBestPathTiles(optimalPaths);
     }
 
