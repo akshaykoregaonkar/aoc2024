@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Day23 {
     List<String> connections = new ArrayList<>();
@@ -33,7 +34,6 @@ public class Day23 {
     private long chiefsLanPartyCandidateCount() {
         Set<Set<String>> triplets = new HashSet<>();
         for (String computer : graph.keySet()) {
-
             List<String> neighbours = graph.get(computer).stream().collect(Collectors.toList());
 
             for (int i = 0; i < neighbours.size(); i++) {
@@ -41,7 +41,7 @@ public class Day23 {
                     String neighbor1 = neighbours.get(i);
                     String neighbor2 = neighbours.get(j);
 
-                    if (graph.get(neighbor1).contains(neighbor2) && potentiallyChiefsParty(computer, neighbor1, neighbor2)) {
+                    if (potentiallyChiefsParty(computer, neighbor1, neighbor2) && graph.get(neighbor1).contains(neighbor2)) {
                         Set<String> triplet = new TreeSet<>(Arrays.asList(computer, neighbor1, neighbor2));
                         triplets.add(triplet);
                     }
@@ -52,7 +52,7 @@ public class Day23 {
     }
 
     private boolean potentiallyChiefsParty(String computer1, String computer2, String computer3) {
-        return computer1.startsWith("t") || computer2.startsWith("t") || computer3.startsWith("t");
+        return Stream.of(computer1, computer2, computer3).anyMatch(c -> c.startsWith("t"));
     }
 
     private String findLargestClique() {
@@ -89,9 +89,9 @@ public class Day23 {
     }
 
     private Set<String> intersect(Set<String> set1, Set<String> set2) {
-        Set<String> newP = new HashSet<>(set1);
-        newP.retainAll(set2);
-        return newP;
+        Set<String> newSet = new HashSet<>(set1);
+        newSet.retainAll(set2);
+        return newSet;
     }
 
     private static Set<String> createNewClique(Set<String> currentClique, String node) {
