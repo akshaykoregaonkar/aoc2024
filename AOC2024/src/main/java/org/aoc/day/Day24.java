@@ -62,20 +62,12 @@ public class Day24 {
     }
 
     /**
-     * z[n] = xor(
-     *     xor(x[n], y[n]),
-     *     or(
-     *         and(x[n-1], y[n-1]),
-     *         and(
-     *             xor(x[n-1], y[n-1]),
-     *             ...
-     *         )
-     *     )
-     * )
-     *
-     * Valid XOR must contain one of x, y, z (i.e. inputs or output)
-     * An output gate used is an AND operation shouldn't be used in an XOR anywhere else
-     * An output gate used in an XOR shouldn't be used in an OR anywhere else
+     * In a ripple carry adder, the XOR gates are primarily used for sum calculation,
+     * AND gates for carry generation, and OR gates assist in carry propagation.
+     * So:
+     * Valid XOR must contain one of x, y, z since this is used to sum inputs
+     * An output gate used in an AND operation shouldn't be used in an XOR anywhere else as this is used for carry generation
+     * An output gate used in an XOR operation shouldn't be used in an OR anywhere else as this is used in carry propagation
      * All gates that output z should have an XOR operation unless its z45 (i.e. last output)
      * **/
     private boolean isFaulty(Gate gate, List<Gate> gates) {
@@ -91,9 +83,7 @@ public class Day24 {
 
     private boolean invalidConnectedOperation(String currOutput, String operation, List<Gate> gates) {
         return gates.stream()
-                .anyMatch(g -> g.op.equals(operation) &&
-                        (g.output.equals(currOutput) || Arrays.asList(g.input1, g.input2).contains(currOutput))
-                );
+                .anyMatch(g -> g.op.equals(operation) && (g.output.equals(currOutput) || Arrays.asList(g.input1, g.input2).contains(currOutput)));
     }
 
     private boolean isInvalidXOR(String... gates) {
